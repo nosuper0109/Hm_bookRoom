@@ -45,7 +45,6 @@ export default struct SearchBar {
     .padding({ top: 4 })
     .width('100%')
     .justifyContent(FlexAlign.Center)
-    .backgroundColor(this.bg_color)
 
   }
 }

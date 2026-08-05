@@ -38,7 +38,7 @@ export default struct Home {
 
   @Builder
   searchBarBuilder($$: IColor) {
-    SearchBar({ font_color: $$.font_color, bg_color: $$.bg_color })
+    SearchBar({ font_color: $$.font_color })
   }
 
   @Builder

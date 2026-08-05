@@ -1,9 +1,11 @@
-import { BasicDataSource } from '../../Models/BasicDataSource'
-import { IBannerItem } from '../../Models/HomeData'
+import { BasicDataSource } from '../../Models/BasicDataSource';
+import { IBannerItem } from '../../Models/HomeData';
 
 @Component
 export default struct BannerLayout {
   @ObjectLink bannerList: BasicDataSource<IBannerItem>
+  @StorageProp('topRectHeight')
+  topRectHeight: number = 0;
 
   build() {
     Swiper() {
@@ -18,7 +20,7 @@ export default struct BannerLayout {
         .color($r('app.color.indicator_color'))
         .selectedColor($r('app.color.indicator_active_color')))
     .autoPlay(true)
-    .height(211 - 36)
+    .height(211 - 36 + this.getUIContext().px2vp(this.topRectHeight))
     .width('100%')
   }
 }
