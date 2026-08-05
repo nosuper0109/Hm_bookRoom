@@ -1,13 +1,14 @@
 import { getHomeDataApi } from '../api/home';
 import { PADDING, SHADOW_RADIUS } from '../constants/size';
 import { BasicDataSource } from '../Models/BasicDataSource';
-import { IBannerItem, INavList, IPlanList, ITileList } from '../Models/HomeData';
+import { IBannerItem, IColor, INavList, IPlanList, ITileList } from '../Models/HomeData';
 import BannerLayout from '../views/Home/BannerLayout';
 import NavList from '../views/Home/NavList';
 import NearbyHouses from '../views/Home/NearbyHouses';
 import PlanList from '../views/Home/PlanList';
 import SearchBar from '../views/Home/SearchBar';
 import TileList from '../views/Home/TileList';
+import ScrollContainer from '../components/ScrollContainer/Index';
 
 
 @Component
@@ -35,47 +36,45 @@ export default struct Home {
     this.getHomeData()
   }
 
-  build() {
-    Scroll() {
-      Stack() {
-        Column() {
-          BannerLayout({ bannerList: this.bannerList })
-          Column() {
-            NavList({ navList: this.navList })
+  @Builder
+  searchBarBuilder($$: IColor) {
+    SearchBar({ font_color: $$.font_color, bg_color: $$.bg_color })
+  }
 
-            TileList({ tileList: this.tileList })
+  @Builder
+  homeContentBuilder() {
+    BannerLayout({ bannerList: this.bannerList })
+    Column() {
+      NavList({ navList: this.navList })
 
-            PlanList({ planList: this.planList })
+      TileList({ tileList: this.tileList })
 
-            Image(this.adPicture)
-              .width('100%')
-              .height(60)
-              .objectFit(ImageFit.Fill)
-              .margin({ top: 9 })
-              .shadow({
-                offsetX: 0,
-                offsetY: 0,
-                color: 'rgba(0, 0, 0, 0.14)',
-                radius: SHADOW_RADIUS
-              })
-          }
-          .width('100%')
-          .padding({ left: PADDING, right: PADDING })
+      PlanList({ planList: this.planList })
 
-          NearbyHouses()
-        }
+      Image(this.adPicture)
         .width('100%')
-
-        SearchBar()
-          .margin({ top: 4 })
-      }
-      .width('100%')
-      .alignContent(Alignment.Top)
+        .height(60)
+        .objectFit(ImageFit.Fill)
+        .margin({ top: 9 })
+        .shadow({
+          offsetX: 0,
+          offsetY: 0,
+          color: 'rgba(0, 0, 0, 0.14)',
+          radius: SHADOW_RADIUS
+        })
     }
-    .scrollBar(BarState.Off)
-    .edgeEffect(EdgeEffect.Spring)
-    .align(Alignment.TopStart)
-    .width("100%")
-    .height("100%")
+    .width('100%')
+    .padding({ left: PADDING, right: PADDING })
+
+    NearbyHouses()
+  }
+
+  build() {
+    ScrollContainer({
+      navBuilderParam: this.searchBarBuilder,
+      contentBuilderParam: () => {
+        this.homeContentBuilder()
+      }
+    })
   }
 }

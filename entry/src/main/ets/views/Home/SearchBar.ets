@@ -2,18 +2,21 @@ import { PADDING } from '../../constants/size'
 
 @Component
 export default struct SearchBar {
+  @Prop font_color: string = '#fff'
+  @Prop bg_color: string
+
   build() {
     Row({ space: PADDING }) {
       Text('北京')
         .fontSize(14)
-        .fontColor($r('app.color.white'))
+        .fontColor(this.font_color)
       Row() {
         Image($r('app.media.search'))
           .width(18)
           .height(18)
         TextInput({ placeholder: '公司/地铁/小区，马上搜索' })
           .placeholderFont({ size: 10 })
-          .height(40)
+          .height(38)
           .backgroundColor($r('app.color.white'))
           .borderRadius(20)
           .padding({ left: 15 })
@@ -37,6 +40,12 @@ export default struct SearchBar {
       Image($r('app.media.message'))
         .width(24)
         .height(24)
+        .fillColor(this.font_color)
     }
+    .padding({ top: 4 })
+    .width('100%')
+    .justifyContent(FlexAlign.Center)
+    .backgroundColor(this.bg_color)
+
   }
 }

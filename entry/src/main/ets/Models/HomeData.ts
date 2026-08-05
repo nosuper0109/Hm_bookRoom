@@ -56,3 +56,8 @@ export interface INearbyHousesItem {
 }
 
 export type INearbyHousesList = INearbyHousesItem[]
+
+export interface IColor {
+  font_color: string
+  bg_color: string
+}
