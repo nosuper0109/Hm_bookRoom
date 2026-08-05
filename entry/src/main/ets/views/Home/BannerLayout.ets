@@ -1,12 +1,13 @@
-import { IBannerItem, IBannerList } from '../../Models/HomeData'
+import { BasicDataSource } from '../../Models/BasicDataSource'
+import { IBannerItem } from '../../Models/HomeData'
 
 @Component
 export default struct BannerLayout {
-  @Prop bannerList: IBannerList = []
+  @ObjectLink bannerList: BasicDataSource<IBannerItem>
 
   build() {
     Swiper() {
-      ForEach(this.bannerList, (item: IBannerItem) => {
+      LazyForEach(this.bannerList, (item: IBannerItem) => {
         Image(item.imageURL)
           .width('100%')
           .objectFit(ImageFit.Fill)
@@ -18,5 +19,6 @@ export default struct BannerLayout {
         .selectedColor($r('app.color.indicator_active_color')))
     .autoPlay(true)
     .height(211 - 36)
+    .width('100%')
   }
 }

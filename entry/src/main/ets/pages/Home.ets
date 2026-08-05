@@ -1,22 +1,31 @@
 import { getHomeDataApi } from '../api/home';
-import { IBannerList, INavList, IPlanList, ITileList } from '../Models/HomeData';
+import { PADDING, SHADOW_RADIUS } from '../constants/size';
+import { BasicDataSource } from '../Models/BasicDataSource';
+import { IBannerItem, INavList, IPlanList, ITileList } from '../Models/HomeData';
 import BannerLayout from '../views/Home/BannerLayout';
+import NavList from '../views/Home/NavList';
+import NearbyHouses from '../views/Home/NearbyHouses';
+import PlanList from '../views/Home/PlanList';
+import SearchBar from '../views/Home/SearchBar';
+import TileList from '../views/Home/TileList';
 
 
 @Component
 export default struct Home {
-  @State bannerList: IBannerList = []
+  @State bannerList: BasicDataSource<IBannerItem> = new BasicDataSource()
   @State planList: IPlanList = []
   @State tileList: ITileList = []
   @State navList: INavList = []
+  @State adPicture: string = ''
 
   async getHomeData() {
     try {
       const res = await getHomeDataApi()
-      this.bannerList = res.bannerList
+      this.bannerList.setList(res.bannerList)
       this.planList = res.planList
       this.tileList = res.tileList
       this.navList = res.navList
+      this.adPicture = res.adPicture
     } catch (error) {
       console.error(error)
     }
@@ -28,11 +37,43 @@ export default struct Home {
 
   build() {
     Scroll() {
-      Column() {
-        BannerLayout({ bannerList: this.bannerList })
+      Stack() {
+        Column() {
+          BannerLayout({ bannerList: this.bannerList })
+          Column() {
+            NavList({ navList: this.navList })
+
+            TileList({ tileList: this.tileList })
+
+            PlanList({ planList: this.planList })
+
+            Image(this.adPicture)
+              .width('100%')
+              .height(60)
+              .objectFit(ImageFit.Fill)
+              .margin({ top: 9 })
+              .shadow({
+                offsetX: 0,
+                offsetY: 0,
+                color: 'rgba(0, 0, 0, 0.14)',
+                radius: SHADOW_RADIUS
+              })
+          }
+          .width('100%')
+          .padding({ left: PADDING, right: PADDING })
+
+          NearbyHouses()
+        }
+        .width('100%')
+
+        SearchBar()
+          .margin({ top: 4 })
       }
+      .width('100%')
+      .alignContent(Alignment.Top)
     }
     .scrollBar(BarState.Off)
+    .edgeEffect(EdgeEffect.Spring)
     .align(Alignment.TopStart)
     .width("100%")
     .height("100%")

@@ -16,7 +16,7 @@ export type IBannerList = IBannerItem[]
 
 export interface INavItem {
   id: string
-  name: string
+  title: string
   imageURL: string
 }
 
@@ -37,3 +37,22 @@ export interface IPlanItem {
 }
 
 export type IPlanList = IPlanItem[]
+
+export interface ITagsItem {
+  name: string
+}
+
+export type ITagsList = ITagsItem[]
+
+export interface INearbyHousesItem {
+  "id": string,
+  "housePicture": string,
+  "tags": ITagsList,
+  "houseTitle": string,
+  "address": string,
+  "rentPriceUnit": string,
+  "rentPriceListing": string,
+  "rentArea": string
+}
+
+export type INearbyHousesList = INearbyHousesItem[]
