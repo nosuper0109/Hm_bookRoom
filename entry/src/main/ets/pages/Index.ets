@@ -11,7 +11,7 @@ struct Index {
   windowStage: window.WindowStage = AppStorage.get("windowStage") as window.WindowStage;
   // How to get the main window TODO 为了预览器正常需要注释
   // mainWin: window.Window = this.windowStage.getMainWindowSync();
-  @State CurrentActiveIndex: number = 1;
+  @State CurrentActiveIndex: number = 2;
   @StorageProp('bottomRectHeight')
   bottomRectHeight: number = 0;
 
