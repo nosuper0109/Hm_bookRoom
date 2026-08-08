@@ -17,6 +17,13 @@ export class BasicDataSource<T> implements IDataSource {
     this.notifyDataAdd(this.originDataArray.length - 1);
   }
 
+  public pushData(list: T[]) {
+    list.forEach(item => {
+      this.originDataArray.push(item)
+      this.notifyDataAdd(this.originDataArray.length - 1);
+    });
+  }
+
   public setList(list: T[]) {
     this.originDataArray = list;
     this.notifyDataReload();

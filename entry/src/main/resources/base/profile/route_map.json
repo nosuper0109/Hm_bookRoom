@@ -1,0 +1,9 @@
+{
+  "routerMap": [
+    {
+      "name": "RentRoomList",
+      "pageSourceFile": "src/main/ets/pages/RentRoom/RentRoomList.ets",
+      "buildFunction": "RentRoomListBuilder"
+    }
+  ]
+}

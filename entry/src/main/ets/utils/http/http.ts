@@ -27,7 +27,7 @@ request.interceptors.response.use(
   })
 
 export class Http {
-  get<T>(url: string, params?: AnyObject) {
+  get<T, K = AnyObject>(url: string, params?: K) {
     return request.get<unknown, T>(url, { params })
   }
 
@@ -39,7 +39,7 @@ export class Http {
     return request.put<unknown, T>(url, data)
   }
 
-  delete<T>(url: string, params?: AnyObject) {
+  delete<T, K = AnyObject>(url: string, params?: K) {
     return request.delete<unknown, T>(url, { params })
   }
 }

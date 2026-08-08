@@ -4,6 +4,7 @@ import { PADDING } from '../../constants/size'
 export default struct SearchBar {
   @Prop font_color: string = '#fff'
   @Prop bg_color: string
+  @Consume('navPathStack') navPathStack: NavPathStack
 
   build() {
     Row({ space: PADDING }) {
@@ -36,6 +37,9 @@ export default struct SearchBar {
       .height(38)
       .backgroundColor($r('app.color.white'))
       .borderRadius(20)
+      .onClick(() => {
+        this.navPathStack.pushPathByName('RentRoomList', null)
+      })
 
       Image($r('app.media.message'))
         .width(24)

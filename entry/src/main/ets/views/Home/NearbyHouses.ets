@@ -5,6 +5,7 @@ import { INearbyHousesItem, ITagsItem } from '../../Models/HomeData';
 
 @Component
 export default struct NearbyHouses {
+  @Consume('navPathStack') navPathStack: NavPathStack
   @State nearbyHousesList: BasicDataSource<INearbyHousesItem> = new BasicDataSource()
   getNearbyHouses = async () => {
     try {
@@ -39,6 +40,9 @@ export default struct NearbyHouses {
             .height(8)
             .fillColor($r('app.color.gray_second'))
         }
+        .onClick(() => {
+          this.navPathStack.pushPathByName('RentRoomList', null)
+        })
       }
       .width('100%')
       .height(44)
