@@ -15,17 +15,15 @@ export default struct RentRoomList {
 
   build() {
     NavDestination() {
-      Column() {
-        NavBar()
-
-        SearchFilter()
-
+      Stack() {
         RoomList()
-          .layoutWeight(1)
+        SearchFilter()
+        NavBar()
+          .backgroundColor($r('app.color.white'))
       }
       .width('100%')
       .height('100%')
-      .justifyContent(FlexAlign.Start)
+      .alignContent(Alignment.TopStart)
     }
     .padding({ top: this.getUIContext().px2vp(this.topRectHeight) })
     .hideTitleBar(true)

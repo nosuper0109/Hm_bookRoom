@@ -2,18 +2,30 @@ import { getRentRoomListApi } from '../../api/rentRoom';
 import { PADDING } from '../../constants/size';
 import { BasicDataSource } from '../../Models/BasicDataSource';
 import { ITagsItem } from '../../Models/HomeData';
-import { IRentRoomItem } from '../../Models/RentRoomData';
+import { IGetRentRoomListParams, IRentRoomItem } from '../../Models/RentRoomData';
+import { globalEmitter } from '../../utils/emitter';
 
 @Component
 export default struct RoomList {
   @State roomList: BasicDataSource<IRentRoomItem> = new BasicDataSource()
   @State total: number = 0
   @State isEnd: boolean = false
-  page: number = 1
+  @State searchOptions: IGetRentRoomListParams = {
+    "page": 1,
+    "limit": 10,
+    "provinceCode": "",
+    "cityCode": "",
+    "districtCode": "",
+    "minRent": "",
+    "maxRent": "",
+    // "paymentType": "",
+    // "orderBy": "",
+    // "orderType": ""
+  }
 
   async getRentRoomList() {
-    const res = await getRentRoomListApi({ page: this.page, limit: 10 })
-    if (this.page === 1) {
+    const res = await getRentRoomListApi(this.searchOptions)
+    if (this.searchOptions.page == 1) {
       this.roomList.setList(res.records)
     } else {
       this.roomList.pushData(res.records)
@@ -22,7 +34,7 @@ export default struct RoomList {
   }
 
   loadMore = () => {
-    this.page++
+    this.searchOptions.page++
     if (this.roomList.totalCount() >= this.total) {
       this.isEnd = true
       return
@@ -53,6 +65,24 @@ export default struct RoomList {
 
   aboutToAppear(): void {
     this.getRentRoomList()
+    this.registerGlobalEmitter()
+  }
+
+  registerGlobalEmitter() {
+    globalEmitter.on('search', async (searchOptions: Partial<IGetRentRoomListParams>) => {
+      this.searchOptions.page = 1;
+      this.searchOptions.limit = 10;
+      if (searchOptions.provinceCode) {
+        this.searchOptions.provinceCode = searchOptions.provinceCode;
+      }
+      if (searchOptions.cityCode) {
+        this.searchOptions.cityCode = searchOptions.cityCode;
+      }
+      if (searchOptions.districtCode) {
+        this.searchOptions.districtCode = searchOptions.districtCode;
+      }
+      this.getRentRoomList()
+    })
   }
 
   build() {
@@ -164,9 +194,8 @@ export default struct RoomList {
             .height(item.activity ? 320 : 210)
             .backgroundColor($r('app.color.white'))
           }
-        })
+        }, (item: IRentRoomItem) => item.id)
       }
-      .backgroundColor($r('app.color.bg_gray'))
       .width('100%')
       .columnsTemplate('1fr 1fr')
       .columnsGap(8)
@@ -178,6 +207,8 @@ export default struct RoomList {
         bottom: PADDING
       })
     }
+    .backgroundColor($r('app.color.bg_gray'))
+    .padding({ top: 88 })
     .scrollBar(BarState.Off)
     .edgeEffect(EdgeEffect.Spring)
     .onReachEnd(this.loadMore)

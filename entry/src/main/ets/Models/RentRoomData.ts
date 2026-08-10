@@ -9,9 +9,9 @@ export type IOrderType = "asc" | "desc"
 export interface IGetRentRoomListParams {
   "page": number
   "limit": number
-  "provinceId"?: string
-  "cityId"?: string
-  "districtId"?: string
+  "provinceCode"?: string
+  "cityCode"?: string
+  "districtCode"?: string
   "minRent"?: string
   "maxRent"?: string
   "paymentType"?: IPaymentType
@@ -37,3 +37,35 @@ export interface IRentRoomItem extends INearbyHousesItem {
 }
 
 export type IRentRoomList = IRentRoomItem[]
+
+export interface IProvinceItem {
+  code: string;
+  name: string;
+}
+
+export type IProvinceList = IProvinceItem[]
+
+export interface ICityItem {
+  "code": string
+  "name": string
+  "provinceCode": string
+}
+
+export type ICityList = ICityItem[]
+
+export interface IDistrictItem {
+  "code": string
+  "name": string
+  "cityCode": string
+  "provinceCode": string
+}
+
+export type IDistrictList = IDistrictItem[]
+
+export interface GetCityListParams {
+  provinceCode: string
+}
+
+export interface GetDistrictListParams {
+  cityCode: string
+}

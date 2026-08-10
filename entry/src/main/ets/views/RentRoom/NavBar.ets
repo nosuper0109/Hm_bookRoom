@@ -21,7 +21,6 @@ export default struct NavBar {
         })
     }
     .padding({ left: PADDING, right: PADDING })
-
     .alignContent(Alignment.Start)
     .width('100%')
     .height(44)
