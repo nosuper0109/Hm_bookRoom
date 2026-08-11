@@ -1,10 +1,10 @@
 import type { INearbyHousesItem } from './HomeData'
 
-export type IPaymentType = "月付" | "季付" | "半年付" | "年付"
+export type IPaymentType = "月付" | "季付" | "半年付" | "年付" | ""
 
-export type IOrderBy = "面积" | "价格"
+export type IOrderBy = "area" | "price" | ""
 
-export type IOrderType = "asc" | "desc"
+export type IOrderType = "asc" | "desc" | ""
 
 export interface IGetRentRoomListParams {
   "page": number
@@ -69,3 +69,22 @@ export interface GetCityListParams {
 export interface GetDistrictListParams {
   cityCode: string
 }
+
+export interface IRentPriceItem {
+  id: number,
+  minRent: string,
+  maxRent: string,
+  text: string
+}
+
+export type IRentPriceList = IRentPriceItem[]
+
+export interface ISortItem {
+  id: number;
+  icon: Resource | string;
+  text: string;
+  orderBy: IOrderBy;
+  orderType: IOrderType;
+}
+
+export type ISortList = ISortItem[]

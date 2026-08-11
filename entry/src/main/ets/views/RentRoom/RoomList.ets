@@ -18,9 +18,9 @@ export default struct RoomList {
     "districtCode": "",
     "minRent": "",
     "maxRent": "",
-    // "paymentType": "",
-    // "orderBy": "",
-    // "orderType": ""
+    "paymentType": "",
+    "orderBy": "",
+    "orderType": ""
   }
 
   async getRentRoomList() {
@@ -81,6 +81,13 @@ export default struct RoomList {
       if (searchOptions.districtCode) {
         this.searchOptions.districtCode = searchOptions.districtCode;
       }
+      this.searchOptions.paymentType = searchOptions.paymentType;
+      this.searchOptions.minRent = searchOptions.minRent;
+      this.searchOptions.maxRent = searchOptions.maxRent;
+      this.searchOptions.orderBy = searchOptions.orderBy;
+      this.searchOptions.orderType = searchOptions.orderType;
+
+
       this.getRentRoomList()
     })
   }
@@ -106,7 +113,7 @@ export default struct RoomList {
                       .fontWeight(700)
                   }
 
-                  Text(item.activity?.['#text'])
+                  Text(Reflect.get(item.activity, '#text'))
                     .padding({
                       left: 8,
                       top: 4,
@@ -118,6 +125,8 @@ export default struct RoomList {
                     .fontColor(item.activity.textColor)
                     .fontWeight(700)
                     .backgroundColor(item.activity.textBackGroundColor)
+                    .width('100%')
+                    .textAlign(TextAlign.LEFT)
                 }
                 .padding({ top: 12, left: 10, right: 10 })
                 .width('100%')
