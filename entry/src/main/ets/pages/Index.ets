@@ -5,6 +5,7 @@ import My from './My'
 import Discover from './Discover'
 import { window } from '@kit.ArkUI'
 import RentRoomList from './RentRoom/RentRoomList'
+import RoomDetail from './RentRoom/RoomDetail'
 
 
 @Entry
@@ -22,6 +23,10 @@ struct Index {
   navMap(name: string) {
     if (name === "RentRoomList") {
       RentRoomList()
+    }
+
+    if (name === "RoomDetail") {
+      RoomDetail()
     }
   }
 

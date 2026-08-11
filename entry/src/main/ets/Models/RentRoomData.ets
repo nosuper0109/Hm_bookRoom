@@ -88,3 +88,7 @@ export interface ISortItem {
 }
 
 export type ISortList = ISortItem[]
+
+export interface IRoomIdParam {
+  id: string
+}

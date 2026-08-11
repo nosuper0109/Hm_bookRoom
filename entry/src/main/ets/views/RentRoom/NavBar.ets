@@ -2,7 +2,7 @@ import { PADDING } from '../../constants/size'
 
 @Component
 export default struct NavBar {
-  // @Consume('navPathStack') navPathStack: NavPathStack
+  @Consume('navPathStack') navPathStack: NavPathStack
 
   build() {
     Stack() {
@@ -17,7 +17,7 @@ export default struct NavBar {
         .height(24)
         .objectFit(ImageFit.Fill)
         .onClick(() => {
-          // this.navPathStack.pop()
+          this.navPathStack.pop()
         })
     }
     .padding({ left: PADDING, right: PADDING })

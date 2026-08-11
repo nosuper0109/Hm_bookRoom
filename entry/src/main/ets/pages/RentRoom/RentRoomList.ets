@@ -7,7 +7,6 @@ export function RentRoomListBuilder() {
   RentRoomList()
 }
 
-@Preview
 @Component
 export default struct RentRoomList {
   @StorageProp('topRectHeight')

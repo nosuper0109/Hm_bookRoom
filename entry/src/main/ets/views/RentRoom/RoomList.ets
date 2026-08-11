@@ -2,11 +2,12 @@ import { getRentRoomListApi } from '../../api/rentRoom';
 import { PADDING } from '../../constants/size';
 import { BasicDataSource } from '../../Models/BasicDataSource';
 import { ITagsItem } from '../../Models/HomeData';
-import { IGetRentRoomListParams, IRentRoomItem } from '../../Models/RentRoomData';
+import { IGetRentRoomListParams, IRentRoomItem, IRoomIdParam } from '../../Models/RentRoomData';
 import { globalEmitter } from '../../utils/emitter';
 
 @Component
 export default struct RoomList {
+  @Consume('navPathStack') navPathStack: NavPathStack
   @State roomList: BasicDataSource<IRentRoomItem> = new BasicDataSource()
   @State total: number = 0
   @State isEnd: boolean = false
@@ -202,6 +203,12 @@ export default struct RoomList {
             .width(160)
             .height(item.activity ? 320 : 210)
             .backgroundColor($r('app.color.white'))
+            .onClick(() => {
+              const param: IRoomIdParam = {
+                id: item.id
+              }
+              this.navPathStack.pushPathByName('RoomDetail', param)
+            })
           }
         }, (item: IRentRoomItem) => item.id)
       }
