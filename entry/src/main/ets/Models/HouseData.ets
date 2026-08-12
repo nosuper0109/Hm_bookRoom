@@ -1,6 +1,5 @@
 import { IRentRoomItem } from './RentRoomData'
 
-// ...
 export interface IHousePictureItem {
   "spaceName": string
   "picList": string[]
