@@ -13,11 +13,15 @@ export default struct NavBar {
   @StorageProp('topRectHeight')
   topRectHeight: number = 0;
   @Prop title: string = ''
+  @Consume('navPathStack') pathStack: NavPathStack = new NavPathStack()
 
   build() {
     Row() {
       Image($r('app.media.arrow_left'))
         .imageStyle()
+        .onClick(() => {
+          this.pathStack.pop()
+        })
       Text(this.title)
         .fontSize(12)
         .fontColor($r('app.color.black'))
