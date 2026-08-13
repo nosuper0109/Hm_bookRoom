@@ -4,6 +4,16 @@
       "name": "RentRoomList",
       "pageSourceFile": "src/main/ets/pages/RentRoom/RentRoomList.ets",
       "buildFunction": "RentRoomListBuilder"
+    },
+    {
+      "name": "LoginPhone",
+      "pageSourceFile": "src/main/ets/pages/Login/LoginPhone.ets",
+      "buildFunction": "LoginPhoneBuilder"
+    },
+    {
+      "name": "LoginCode",
+      "pageSourceFile": "src/main/ets/pages/Login/LoginCode.ets",
+      "buildFunction": "LoginCodeBuilder"
     }
   ]
 }

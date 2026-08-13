@@ -31,11 +31,11 @@ export class Http {
     return request.get<unknown, T>(url, { params })
   }
 
-  post<T>(url: string, data?: AnyObject) {
+  post<T, K>(url: string, data?: K) {
     return request.post<unknown, T>(url, data)
   }
 
-  put<T>(url: string, data?: AnyObject) {
+  put<T, K>(url: string, data?: K) {
     return request.put<unknown, T>(url, data)
   }
 

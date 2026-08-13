@@ -28,6 +28,10 @@ struct Index {
     if (name === "RoomDetail") {
       RoomDetail()
     }
+
+    // if (name === "LoginPhone") {
+    //   LoginPhone()
+    // }
   }
 
   @Builder
