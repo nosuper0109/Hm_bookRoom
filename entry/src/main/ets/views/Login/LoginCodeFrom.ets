@@ -1,4 +1,4 @@
-import { postPhoneToCodeApi } from '../../api/login';
+import { loginApi, postPhoneToCodeApi } from '../../api/login';
 import { PADDING } from '../../constants/size';
 
 @Component
@@ -6,6 +6,10 @@ export default struct LoginCodeForm {
   START_TIME: number = 60
   @State time: number = this.START_TIME
   @Prop phone: string = ''
+  @State code: string = ''
+  @StorageLink('token') token: string = ''
+  @Consume('navPathStack') pathStack: NavPathStack = new NavPathStack()
+  @StorageLink('CurrentActiveIndex') currentActiveIndex: number = 0
   countDown = () => {
     const timer = setInterval(() => {
       if (this.time === 0) {
@@ -33,10 +37,23 @@ export default struct LoginCodeForm {
     this.time = 0
   }
 
+  // 登录
+  async login() {
+    try {
+      const res = await loginApi(this.phone, this.code);
+      // 持久化存储 token
+      this.token = res.token
+      this.currentActiveIndex = 4
+      this.pathStack.clear()
+    } catch {
+      this.getUIContext().getPromptAction().showToast({ message: '验证码错误' })
+    }
+  }
+
   build() {
     Column() {
       Stack() {
-        TextInput({ placeholder: '请输入验证码' })
+        TextInput({ placeholder: '请输入验证码', text: $$this.code })
           .placeholderColor('#c1c1c1')
           .padding({ left: 0 })
           .backgroundColor(Color.Transparent)
@@ -66,8 +83,12 @@ export default struct LoginCodeForm {
 
       Row() {
         Button('确定')
-          .backgroundColor('#36D1A1')
-          .fontColor('#FFFFFF')
+          .backgroundColor(this.code.length == 6 ? '#36D1A1' : '#E0E0E0')
+          .fontColor(this.code.length == 6 ? '#FFFFFF' : '#616161')
+          .enabled(this.code.length == 6)
+          .onClick(() => {
+            this.login()
+          })
       }
       .width('100%')
       .justifyContent(FlexAlign.End)

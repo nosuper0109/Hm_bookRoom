@@ -1,4 +1,4 @@
-import axios from '@ohos/axios'
+import axios, { InternalAxiosRequestConfig } from '@ohos/axios'
 import { promptAction } from '@kit.ArkUI'
 import type { AnyObject } from '../../Models/HttpModel'
 
@@ -7,7 +7,12 @@ const request = axios.create({
 })
 
 request.interceptors.request.use(
-  (config) => {
+  (config: InternalAxiosRequestConfig) => {
+    const token = AppStorage.get<string>('token') ?? ''
+    if (token) {
+      // config.headers.set('Authorization', `Bearer ${token}`)
+      config.headers.set('token', token)
+    }
     return config
   }
 )

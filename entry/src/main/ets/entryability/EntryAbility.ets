@@ -28,6 +28,8 @@ export default class EntryAbility extends UIAbility {
         return;
       }
       hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
+      // 必须放在入口页面
+      PersistentStorage.persistProp('token', '')
     });
 
     try {

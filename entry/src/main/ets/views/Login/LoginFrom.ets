@@ -74,7 +74,6 @@ export default struct LoginFrom {
           .fontColor(this.isEnable ? '#FFFFFF' : '#616161')
           .enabled(this.isEnable)
           .onClick(() => {
-            console.log('aaaa')
             const param: IPhoneParam = { phone: this.phone }
             this.pathStack.pushPathByName('LoginCode', param)
           })
