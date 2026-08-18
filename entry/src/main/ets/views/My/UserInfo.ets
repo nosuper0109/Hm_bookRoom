@@ -42,10 +42,15 @@ export default struct UserInfo {
       Avatar({ src: this.avatarSrc, avatarSize: rvp(60) })
       Column({ space: rvp(4) }) {
         Text(this.token ? `Hi，${this.nickname}` : 'Hi，小谷粒')
-          .fontSize(rvp(16)).fontColor($r('app.color.white')).fontWeight(700)
-        Text('谷粒点15').fontSize(rvp(12)).fontColor($r('app.color.white'))
+          .fontSize(rvp(16))
+          .fontColor($r('app.color.white'))
+          .fontWeight(700)
+        Text('谷粒点15')
+          .fontSize(rvp(12))
+          .fontColor($r('app.color.white'))
       }.alignItems(HorizontalAlign.Start)
-    }.margin({ top: rvp(44) }).width('100%')
+    }
+    .width('100%')
     .onClick(() => {
       if (!this.token) {
         this.pathStack.pushPathByName('LoginPhone', null)

@@ -4,5 +4,5 @@ import { IRentRoomDetail } from '../Models/HouseData'
 
 export const getRoomDetailApi = (id: string): Promise<IRentRoomDetail> => {
   const params: IRoomIdParam = { id }
-  return http.get<IRentRoomDetail, IRoomIdParam>('/house/detail', params)
+  return http.get<IRentRoomDetail>('/house/detail', params)
 }

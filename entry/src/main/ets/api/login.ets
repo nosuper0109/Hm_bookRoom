@@ -4,12 +4,13 @@ import { http } from '../utils/http';
 
 // 获取发现列表数据
 export const postPhoneToCodeApi = (data: IPhoneParam): Promise<null> => {
-  return http.post<null, IPhoneParam>('/sendSMSCode', data);
+  return http.post<null>('/sendSMSCode', data);
 }
 
 // 登录
 export const loginApi = (phone: string, code: string): Promise<ILoginResult> => {
-  return http.post<ILoginResult, ILoginParam>('/login', { phone, code })
+  const param: ILoginParam = { phone, code }
+  return http.post<ILoginResult>('/login', param)
 }
 
 // 获取用户数据

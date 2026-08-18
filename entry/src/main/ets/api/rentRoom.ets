@@ -11,7 +11,7 @@ import type {
 
 // 获取租房列表数据
 export const getRentRoomListApi = (params: IGetRentRoomListParams): Promise<IGetRentRoomListResponse> => {
-  return http.get<IGetRentRoomListResponse, IGetRentRoomListParams>('/house/search', params)
+  return http.get<IGetRentRoomListResponse>('/house/search', params)
 }
 
 // 获取省份数据
@@ -22,11 +22,11 @@ export const getProvinceListApi = (): Promise<IProvinceList> => {
 // 获取城市数据
 export const getCityListApi = (provinceCode: string): Promise<ICityList> => {
   const params: GetCityListParams = { provinceCode }
-  return http.get<ICityList, GetCityListParams>('/city', params)
+  return http.get<ICityList>('/city', params)
 }
 
 // 获取区县数据
 export const getDistrictListApi = (cityCode: string): Promise<IDistrictList> => {
   const params: GetDistrictListParams = { cityCode }
-  return http.get<IDistrictList, GetDistrictListParams>('/area', params)
+  return http.get<IDistrictList>('/area', params)
 }

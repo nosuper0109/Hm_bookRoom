@@ -14,7 +14,7 @@ import PlanList from '../views/My/PlanList'
 export default struct My {
   @Builder
   navBuilder($$: IColor) {
-    NavBar($$)
+    NavBar({ font_color: $$.font_color })
   }
 
   @Builder
@@ -30,8 +30,6 @@ export default struct My {
       .padding({ left: rvp(PADDING), right: rvp(PADDING), top: rvp(44) + getWindowTopHeight() })
     }.width('100%').align(Alignment.TopStart)
   }
-
-
 
   build() {
     ScrollContainer({

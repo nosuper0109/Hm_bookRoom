@@ -7,7 +7,6 @@ import { window } from '@kit.ArkUI'
 import RentRoomList from './RentRoom/RentRoomList'
 import RoomDetail from './RentRoom/RoomDetail'
 
-
 @Entry
 @Component
 struct Index {

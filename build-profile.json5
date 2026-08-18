@@ -12,6 +12,11 @@
           "strictMode": {
             "caseSensitiveCheck": true,
             "useNormalizedOHMUrl": true
+          },
+          "arkOptions": {
+            "buildProfileFields": {
+              "baseURL": 'http://192.168.20.15:6060'
+            }
           }
         }
       }

@@ -59,7 +59,7 @@ export default struct NavBar {
       .height(44)
       .justifyContent(FlexAlign.SpaceBetween)
     }
-    .padding({ left: PADDING, right: PADDING, top: this.getUIContext().px2vp(this.topRectHeight) })
+    .padding({ left: PADDING, right: PADDING })
 
   }
 }
